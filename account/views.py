@@ -10,17 +10,20 @@ def registration_view(request:HttpRequest):
     if request.method == 'POST':
         registration_form = UserCreationForm(request.POST)
         if registration_form.is_valid():
-            username = registration_form.cleaned_data['username']
-            password = registration_form.cleaned_data['password1']
-            try:
-                user = User.objects.create(username=username,password=password)
-            except KeyError:
-                return HttpResponseBadRequest('Username already registered.')
-            except Exception as e:
-                print(f'Following exception occured while creating user : {e}')
-                return HttpResponseServerError('Some error occured.')
-            else:
-                return HttpResponse(f'User with username : {user.username} created')
+            registration_form.save()
+            # TODO: Need to add tests for this. Also put this in try except
+            return HttpResponse('User created')
+            # username = registration_form.cleaned_data['username']
+            # password = registration_form.cleaned_data['password1']
+            # try:
+            #     user = User.objects.create(username=username,password=password)
+            # except KeyError:
+            #     return HttpResponseBadRequest('Username already registered.')
+            # except Exception as e:
+            #     print(f'Following exception occured while creating user : {e}')
+            #     return HttpResponseServerError('Some error occured.')
+            # else:
+            #     return HttpResponse(f'User with username : {user.username} created')
     else:
         registration_form = UserCreationForm()
         return render(request, 'account/registration.html', {
@@ -30,6 +33,7 @@ def registration_view(request:HttpRequest):
 def login_view(request:HttpRequest):
     if request.method == 'POST':
         auth_form = AuthenticationForm(request.POST)
+        # Need to check if the error is due to not directly saving the form as now user's password is being saved correctly.
         if auth_form.is_valid():
             username = auth_form.cleaned_data['username']
             password = auth_form.cleaned_data['password']
