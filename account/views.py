@@ -42,7 +42,6 @@ def login_view(request:HttpRequest):
             else:
                 return HttpResponse(f'No user with {username} found.', status=404)
         else:
-            # print('Hi')
             print(auth_form.errors)
             return HttpResponseBadRequest('Invalid form details')
     else:
