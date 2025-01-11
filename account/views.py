@@ -9,6 +9,8 @@ from django.urls import reverse
 def registration_view(request:HttpRequest):
     if request.method == 'POST':
         registration_form = UserCreationForm(request.POST)
+        valid_data = request.POST
+        print(f'Valid data : {valid_data}')
         if registration_form.is_valid():           
             # TODO: Need to add tests for this. Also put this in try except
             try:
@@ -21,6 +23,7 @@ def registration_view(request:HttpRequest):
             else:
                 return HttpResponse(f'User with username : {user.username} created')
         else:
+            print(registration_form.errors)
             return HttpResponseBadRequest('Invalid form details')
     else:
         registration_form = UserCreationForm()
