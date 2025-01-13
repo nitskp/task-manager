@@ -62,3 +62,6 @@ def logout_view(request:HttpRequest):
     else:
         print(f'User logged out')
     return reverse('account:login')
+
+def profile_view(request:HttpRequest):
+    return HttpResponse('Profile view')
