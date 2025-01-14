@@ -64,4 +64,5 @@ def logout_view(request:HttpRequest):
     return reverse('account:login')
 
 def profile_view(request:HttpRequest):
-    return HttpResponse('Profile view')
+
+    return render(request, 'account/profile.html')

@@ -40,4 +40,5 @@ class RegistrationTest(TestCase):
         # Check password if matches strong password condition and password1 = password2
         self.assertEqual()
 
+# class ProfileViewTest()
         
