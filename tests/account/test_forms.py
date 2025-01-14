@@ -10,3 +10,10 @@ def test_profile_form_fields_and_types():
     assert isinstance(form.fields['last_name'], forms.CharField)
     assert isinstance(form.fields['photo'], forms.FileField)
     assert isinstance(form.fields['email'], forms.EmailField)
+
+def test_profile_form_field_validation():
+    profile_form = ProfileForm()
+    assert profile_form.fields['first_name'].max_length == 255
+    assert profile_form.fields['last_name'].max_length == 255
+    assert profile_form.fields['email'].max_length == 255
+   
