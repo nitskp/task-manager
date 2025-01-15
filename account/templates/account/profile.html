@@ -1,1 +1,11 @@
-profile
+{% extends 'base_account.html' %}
+{% block title %}
+    Profile
+{% endblock title %}
+
+{% block content %}
+    <form method="post">
+        {{profile_form.as_p}}
+        <input type="submit" value="Submit">
+    </form>
+{% endblock content %}
