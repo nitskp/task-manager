@@ -65,8 +65,14 @@ def logout_view(request:HttpRequest):
     return reverse('account:login')
 
 def profile_view(request:HttpRequest):
-    profile_form = ProfileForm()
-    context = {
-        'profile_form': profile_form
-    }
-    return render(request, 'account/profile.html', context)
+    if request.method == 'POST':
+        profile_form = ProfileForm(data=request.POST)
+        if profile_form.is_valid():
+            pass
+        return HttpResponse('Profile updated')
+    else:
+        profile_form = ProfileForm()
+        context = {
+            'profile_form': profile_form
+        }
+        return render(request, 'account/profile.html', context)
