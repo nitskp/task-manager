@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.urls import reverse
+from .forms import ProfileForm
 
 # Create your views here.
 def registration_view(request:HttpRequest):
@@ -64,5 +65,8 @@ def logout_view(request:HttpRequest):
     return reverse('account:login')
 
 def profile_view(request:HttpRequest):
-
-    return render(request, 'account/profile.html')
+    profile_form = ProfileForm()
+    context = {
+        'profile_form': profile_form
+    }
+    return render(request, 'account/profile.html', context)
